@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserInfo } from '../model/authInterface';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,19 +17,12 @@ api = 'http://localhost:3000/api/v1/'
   return this.httpClient.post<{message: string, status: string, data: any, token: string}>(this.api+ 'user/login', user)
   }
   
-  getUsers(){
+  getUsers() : Observable<any> {
     const getToken = localStorage.getItem('token') as string;
-  
-    if (!getToken) {
-      // Handle error: token does not exist in localStorage
-      console.error('Token not found in localStorage');
-      return;
-    }
-    // set token  exist in localStorage
     var reqHeader = new HttpHeaders({ 
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer '+getToken,
-   });
-  return this.httpClient.get<any>(this.api + "user/getMe", { headers: reqHeader });
+      'Authorization': 'Bearer ' + getToken,
+    });
+    return this.httpClient.get<any>(this.api + "user/getMe", { headers: reqHeader });
   }
 }
