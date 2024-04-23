@@ -9,9 +9,7 @@ import { SignUpComponent } from './component/sign-up/sign-up.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HomeComponent } from './component/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,17 +18,14 @@ import { provideHttpClient } from '@angular/common/http';
     HeaderComponent,
     SignUpComponent,
     HomeComponent,
-    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule, 
-    
     ToastrModule.forRoot(),
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()
