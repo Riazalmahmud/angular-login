@@ -1,0 +1,74 @@
+<div class=" space-y-4 md:space-y-6 sm:p-8 section-section h-screen flex items-center  ">
+    <div class="lg:w-[450px] mx-auto shadow-2xl bg-white  my-8 p-8 rounded-xl">
+     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+         Sign up to your account
+     </h1>
+     <form class="space-y-4 md:space-y-6 mt-4" [formGroup]="createFormGroup" (submit)="loginSubmit()">
+         <div>
+             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
+             <input type="text" name="name" id="name" formControlName="userName"  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Riaz al Mahmud " required="" [class.is-invalid]="email.invalid && (email.dirty || email.touched)">
+         </div>
+ 
+         <div *ngIf="userName?.invalid && (userName?.dirty || userName?.touched)">
+           <div *ngIf="userName?.errors ">
+ <p class="text-red-400 text-sm">  Name address is required  </p>
+           </div>
+         </div>
+         <div>
+             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+             <input type="email" name="email" id="email" formControlName="email"  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="" [class.is-invalid]="email.invalid && (email.dirty || email.touched)">
+         </div>
+ 
+         <div *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+           <div *ngIf="email?.errors ">
+ <p class="text-red-400 text-sm">  Email address is required  </p>
+           </div>
+         </div>
+         <div class="relative">
+          <p class="absolute text-black right-2 top-9 bottom-0 " (click)="onClick(1)"><i class="fa fa-eye text-black" aria-hidden="true" *ngIf="!show"></i>
+            <i class="fa fa-eye-slash text-black" aria-hidden="true" *ngIf="show"></i></p>
+             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+             <input type="{{checkPassword}}" name="password" id="password" formControlName="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" [class.is-invalid]="password.invalid && (password.dirty || password.touched)">
+         </div>
+         <div class="relative">
+          <p class="absolute text-black right-2 top-9 bottom-0 " (click)="onClick(2)"><i class="fa fa-eye text-black" aria-hidden="true" *ngIf="!checkConfirmPasswordShow"></i>
+            <i class="fa fa-eye-slash text-black" aria-hidden="true" *ngIf="checkConfirmPasswordShow"></i></p>
+             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">    Confirm Password</label>
+             <input type="{{checkConfirmPassword}}" name="password" id="password" formControlName="confirmPassword" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" [class.is-invalid]="confirmPassword.invalid && (confirmPassword.dirty || password.touched)">
+            </div>
+            <div class="text-red-400 text-sm" *ngIf="password?.invalid && (password?.dirty || password?.touched) ">
+              <span *ngIf="!password?.value?.match('^(?=.*[A-Z])')"  class="block" [ngClass]="{'text-primary': password?.value?.match('^(?=.*[A-Z])')}">At least one uppercase
+                                      letter.</span>
+              <span *ngIf="!password?.value?.match('(?=.*[a-z])')" class="block" [ngClass]="{'text-primary': password?.value?.match('(?=.*[a-z])')}">At least one lowercase
+                                      letter.</span>
+              <span *ngIf="!password?.value?.match('(.*[0-9].*)')" class="block" [ngClass]="{'text-primary': password?.value?.match('(.*[0-9].*)')}">At least one
+                                      digit.</span>
+              <span *ngIf="!password?.value?.match('(?=.*[!@#$%^&*])')" class="block" [ngClass]="{'text-primary': password?.value?.match('(?=.*[!@#$%^&*])')}">At least one
+                                      special
+                                      character.</span>
+              <span *ngIf="!password?.value?.match('.{8,}')" class="block" [ngClass]="{'text-primary': password?.value?.match('.{8,}')}">At least 8 characters
+                                      long.</span>
+           </div>
+            <div class="text-red-400 text-sm" *ngIf="createFormGroup?.errors ">
+              <span class="block"> Password Dose not Match </span>
+           </div>
+ 
+         <div class="flex items-center justify-between">
+             <div class="flex items-start">
+                 <div class="flex items-center h-5">
+                   <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="">
+                 </div>
+                 <div class="ml-3 text-sm">
+                   <label for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>
+                 </div>
+             </div>
+             <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
+         </div>
+         <button type="submit" class="w-full text-white section-section hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+         <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+             Don’t have an account yet? <a [routerLink]="['/login']"   class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+         </p>
+     </form>
+    </div>
+ </div>
+ 
