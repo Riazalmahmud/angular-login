@@ -55,8 +55,8 @@ export class LoginComponent implements OnInit {
     }
     this.authService.signIn(this.createFormGroup.value).subscribe({
       next: (res) => {
-        this.toster.success('Successful', res.message);
         localStorage.setItem('token', res.token);
+        this.toster.success('Successful', res.message);
         this.router.navigate(['/'])
         console.log(res);
       },

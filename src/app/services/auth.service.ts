@@ -27,7 +27,7 @@ api = 'http://localhost:3000/api/v1/'
     // set token  exist in localStorage
     var reqHeader = new HttpHeaders({ 
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + getToken,
+      'Authorization': 'Bearer '+getToken,
    });
   return this.httpClient.get<any>(this.api + "user/getMe", { headers: reqHeader });
   }
